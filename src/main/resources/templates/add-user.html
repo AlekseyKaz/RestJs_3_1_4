@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link href="../css/shards.min.css" th:href="@{/css/shards.min.css}" rel="stylesheet" />
+
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row bg-dark bg-gradient align-items-center">
+    <div class="col-11">
+                    <span class="nav navbar-text text-white fs-4">
+                        <strong><th:block th:text="${user.getEmail()}"></th:block></strong>
+                        &nbsp;<th:block th:text="'with roles: '+ ${user.getRolesString()}"></th:block>
+                    </span>
+    </div>
+    <div class="col-1">
+      <!--        logout-->
+      <div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link text-secondary" th:href="@{/logout}">logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--      боковая панель-->
+<div class="row">
+  <div class="col-md-2 bg-white vh-100"><br>
+    <ul class="nav flex-column nav-pills fs-5">
+      <li class="nav-item">
+        <a class="nav-link active" th:href="@{/admin}">Admin</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/user}">User info</a>
+      </li>
+    </ul>
+  </div>
+
+  <!--основной блок-->
+  <div class="col-md-10 bg-light "><br>
+    <h1>
+      Admin panel
+    </h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>
+          <ul class="nav nav-tabs font-weight-normal">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/admin/signup">new user</a>
+            </li>
+          </ul>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <h4>
+            &nbsp;Add new user
+          </h4>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+<table class="table" style="background-color: #f8f9fa">
+   <div class="mx-auto" style="width: 400px; line-height: normal; ">
+     <form action="#" th:action="@{/admin/adduser}" th:object="${newUser}" method="post">
+       <div class="form-group ">
+                <label for="id"><b>ID</b></label>
+                <input type="text" class="form-control " id="id" th:value="${user.getId()} "readonly/>
+       </div>
+
+       <div class="form-group">
+         <label for="name" class="col-form-label">Name</label>
+         <input type="text" th:field="*{name}" class="form-control" id="name" >
+         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+       </div>
+
+       <div class="form-group">
+         <label for="lastname" class="col-form-label">Lastname</label>
+         <input type="text" th:field="*{lastname}" class="form-control" id="lastname">
+         <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger"></span>
+       </div>
+
+       <div class="form-group">
+         <label for="age" class="col-form-label">Age</label>
+         <input type="number" th:field="*{age}" class="form-control" id="age" >
+         <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="text-danger"></span>
+       </div>
+
+       <div class="form-group">
+         <label for="email" class="col-form-label">Email</label>
+         <input type="text" th:field="*{email}" class="form-control" id="email" >
+         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+       </div>
+
+       <div class="form-group ">
+         <label for="password" class="col-form-label">Password</label>
+         <input type="text" th:field="*{password}" class="form-control" id="password">
+         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+       </div>
+
+       <div class="form-group">
+         <label th:for="role1"><b>Role</b></label>
+         <select th:field="*{roles}" size="2" multiple class="form-control" id="role1">
+           <option th:each="role : ${roles}"
+                   th:text="${role.getName()}"
+                   th:value="${role.getId()}"></option>
+         </select>
+       </div>
+       <button type="submit" class="btn btn-success col-md-auto">Add new user</button>
+     </form>
+   </div>
+</table>
+
+   </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
