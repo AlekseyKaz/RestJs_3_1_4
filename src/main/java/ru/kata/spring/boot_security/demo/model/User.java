@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +18,10 @@ public class User implements UserDetails, Serializable {
     private Long id;
 
     @Column(name = "first_name")
-    private String name;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String lastname;
+    private String lastName;
 
     @Column(name = "age")
     private int age;
@@ -71,18 +70,18 @@ public class User implements UserDetails, Serializable {
         return true;
     }
 
-    public User(String name, String lastname, int age, String email, String password, Collection<Role> roles) {
-        this.name = name;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, int age, String email, String password, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
-    public User(String name, String lastname, int age, String email, String password) {
-        this.name = name;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, int age, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
@@ -108,8 +107,8 @@ public class User implements UserDetails, Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", name='" + firstName + '\'' +
+                ", lastname='" + lastName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", roles=" + getRolesString() +
