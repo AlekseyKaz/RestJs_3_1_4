@@ -42,8 +42,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                //методы во время теста
+                .and().httpBasic()
+                .and().csrf().disable().cors();
     }
+
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
