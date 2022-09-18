@@ -6,7 +6,7 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
 import java.util.List;
 
-public interface RoleService  {
+public interface RoleService {
     Role getRoleById(long id);
 
     void addRole(Role role);

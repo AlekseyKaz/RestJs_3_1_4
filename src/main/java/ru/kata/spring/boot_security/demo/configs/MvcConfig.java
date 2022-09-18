@@ -13,21 +13,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/user").setViewName("userPage");
         registry.addViewController("/admin").setViewName("adminPage");
     }
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
-//    @Bean
-//    SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-//        http
-//                // ...
-//                .cors(cors -> cors.disable());
-//        return http.build();
-//    }
+//
 
 }

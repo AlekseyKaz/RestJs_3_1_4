@@ -113,7 +113,7 @@ $('#edit').on('show.bs.modal', ev => {
 async function showEditModal(id) {
     let user = await getUser(id);
     let form = document.forms["formEditUser"];
-    form.id.value = user.id;
+    form.id = user.id;  /* !!!*/
     form.firstName.value = user.firstName;
     form.lastName.value = user.lastName;
     form.age.value = user.age;

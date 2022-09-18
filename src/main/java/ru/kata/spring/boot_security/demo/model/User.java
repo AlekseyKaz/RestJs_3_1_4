@@ -38,11 +38,9 @@ public class User implements UserDetails, Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-//    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
-//        return  roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 
     @Override
@@ -91,6 +89,18 @@ public class User implements UserDetails, Serializable {
     }
 
 
+    public String getRolesString() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role:roles) {
+            if(role.getName().contains("ROLE_ADMIN")) {
+                sb.append(" ADMIN");
+            } else if (role.getName().contains("ROLE_USER")) {
+                sb.append(" USER");
+            }
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -98,6 +108,8 @@ public class User implements UserDetails, Serializable {
                 ", name='" + firstName + '\'' +
                 ", lastname='" + lastName + '\'' +
                 ", age=" + age +
-                ", email='" + email + '\'' ;
+                ", email='" + email + '\'' +
+                ", roles=" + getRolesString() +
+                '}';
     }
 }
