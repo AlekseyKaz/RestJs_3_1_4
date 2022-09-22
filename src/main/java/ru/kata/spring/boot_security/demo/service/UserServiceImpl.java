@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        User userFromDb = userRepository.findByEmail(user.getEmail());
+        if(userFromDb != null) {
+            throw new RuntimeException("такой пользователь уже есть");
+        }
         userRepository.save(user);
     }
     // если у юзера пароль менялся, то вызывать новый кодер
